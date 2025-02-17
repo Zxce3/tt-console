@@ -7,6 +7,7 @@
     import { onMount } from 'svelte';
     import { browser } from '$app/environment';
     import '../app.css';
+    import ScoreTable from '$lib/components/ScoreTable.svelte';
     // Game state and refs with proper reactivity
     let tetrisComponent = $state<TetrisComponent | undefined>(undefined);
     let settings = $state<TetrisSettings>({
@@ -17,6 +18,7 @@
         showNext: true
     });
     let scoreHistory = $state<ScoreRecord[]>([]);
+    let showHistory = $state<boolean>(false);
 
     // Computed button states using store values
     let buttonStates = $derived({
@@ -96,6 +98,12 @@
         gameStore.setGameOver();
         gameStore.setStarted(false);
     }
+
+    function handleKeydown(e: KeyboardEvent) {
+        if ($gameStatus.isActive && ['Space', 'ArrowUp', 'ArrowDown'].includes(e.code)) {
+            e.preventDefault();
+        }
+    }
 </script>
 
 <svelte:head>
@@ -109,6 +117,8 @@
     <meta name="twitter:title" content="Tetris Console Edition" />
     <meta name="twitter:description" content="Play Tetris in your browser's console" />
 </svelte:head>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <div class="container">
     <h1>Tetris Console Edition</h1>
@@ -205,28 +215,11 @@
 
         {#if scoreHistory.length > 0}
             <div class="history">
-                <h2>High Scores</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Score</th>
-                            <th>Time</th>
-                            <th>Duration</th>
-                            <th>Board Size</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {#each scoreHistory as record}
-                            <tr>
-                                <td>{record.score}</td>
-                                <td>{record.timestamp}</td>
-                                <td>{record.duration}</td>
-                                <td>{record.rows}×{record.cols}</td>
-                            </tr>
-                        {/each}
-                    </tbody>
-                </table>
+                <button class="toggle-history" onclick={() => showHistory = !showHistory}>
+                    Show High Scores
+                </button>
             </div>
+            <ScoreTable scores={scoreHistory} bind:show={showHistory} />
         {/if}
     {/if}
 </div>
