@@ -81,6 +81,18 @@
     }
 </script>
 
+<svelte:head>
+    <title>Tetris Console Edition - A Browser Console Game</title>
+    <meta name="description" content="Play Tetris directly in your browser's developer console. A unique implementation built with Svelte featuring customizable settings, score tracking, and ghost pieces." />
+    <meta name="keywords" content="tetris, console game, browser game, svelte, typescript" />
+    <meta property="og:title" content="Tetris Console Edition" />
+    <meta property="og:description" content="A unique Tetris game that runs in your browser's developer console" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Tetris Console Edition" />
+    <meta name="twitter:description" content="Play Tetris in your browser's console" />
+</svelte:head>
+
 <div class="container">
     <h1>Tetris Console Edition</h1>
     
