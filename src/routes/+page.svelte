@@ -122,6 +122,9 @@
 
 <div class="container">
     <h1>Tetris Console Edition</h1>
+    <a href="https://github.com/zxce3/tt-console" class="github-link" target="_blank" rel="noopener noreferrer">
+        View on GitHub
+    </a>
     
     {#if browser && !$devToolsStore.isOpen}
         <div class="devtools-warning">

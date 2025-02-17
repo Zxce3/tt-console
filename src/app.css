@@ -180,6 +180,24 @@ button.restart:hover {
     text-align: center;
 }
 
+.github-link {
+    display: inline-block;
+    color: var(--secondary-color);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--secondary-color);
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.github-link:hover {
+    background: var(--secondary-color);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
 
 .paused-text {
     color: var(--accent-color);
