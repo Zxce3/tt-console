@@ -1,38 +1,60 @@
-# sv
+# Tetris Console Edition
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A unique Tetris implementation that runs in the browser's developer console, built with Svelte.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- 🎮 Console-based Tetris gameplay
+- ⚙️ Customizable settings:
+  - Board size (rows & columns)
+  - Game speed
+  - Ghost piece toggle
+  - Next piece preview
+- 📊 Score tracking and history
+- ⏸️ Pause/Resume functionality
+- 👻 Ghost piece visualization
+- 🏆 High score tracking
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Controls
 
-# create a new project in my-app
-npx sv create my-app
-```
+- ← → : Move piece left/right
+- ↑ : Rotate piece
+- ↓ : Soft drop
+- Space : Hard drop
+- P : Pause/Resume
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
+## Development
 
 ```bash
-npm run build
+# Install dependencies
+bun install
+
+# Start development server
+bun run dev
+
+# Build for production
+bun run build
+
+# Preview production build
+bun run preview
 ```
 
-You can preview the production build with `npm run preview`.
+## Playing the Game
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+1. Open your browser's developer console (F12)
+2. Configure game settings if desired
+3. Click "Start Game"
+4. Use keyboard controls to play
+5. Track your score and time in the console display
+
+## Technical Details
+
+Built with:
+- Svelte
+- TypeScript
+- Console-based rendering
+- Local storage for score persistence
+
+## Credits
+
+Created as a fun experiment in console-based gaming using modern web technologies.
