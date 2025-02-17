@@ -6,17 +6,17 @@ export interface TetrisSettings {
     showNext: boolean;
 }
 
+export interface TetrisComponent {
+    togglePause: () => void;
+    restart: () => void;
+}
+
 export interface ScoreRecord {
     score: number;
     timestamp: string;
     duration: string;
     rows: number;
     cols: number;
-}
-
-export interface TetrisComponent {
-    togglePause: () => void;
-    restart: () => void;
 }
 
 // Game store types

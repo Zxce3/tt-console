@@ -239,6 +239,7 @@
             console.log(`Current Piece: ${gameState.currentPiece.name}`);
             console.log(`Score: ${gameState.score}`);
         });
+        gameStore.updatePiece(gameState.currentPiece.name);
     }
 
     function createBoard(): void {
@@ -279,6 +280,7 @@
             }
         }));
         clearLines();
+        gameStore.updateScore(gameState.score);
         newPiece();
     }
 
@@ -314,15 +316,24 @@
         const shapeKeys = Object.keys(SHAPES) as (keyof typeof SHAPES)[];
         const randomShape = shapeKeys[Math.floor(Math.random() * shapeKeys.length)];
         const { shape, name } = SHAPES[randomShape];
-        gameState.currentPiece.name = name;
-        gameState.currentPiece.shape = shape;
-        gameState.currentPiece.row = 0;
-        gameState.currentPiece.col = Math.floor((cols - shape[0].length) / 2);
+        gameState.currentPiece = {
+            shape,
+            name,
+            row: 0,
+            col: Math.floor((cols - shape[0].length) / 2)
+        };
         
-        // Check for game over
+        gameStore.updatePiece(name);
+        
         if (collision(gameState.currentPiece.row, gameState.currentPiece.col, gameState.currentPiece.shape)) {
             gameOver();
         } else {
+            dispatch('gameStatus', {
+                paused: gameState.paused,
+                score: gameState.score,
+                time: gameState.time.current,
+                piece: name
+            });
             render();
         }
     }
@@ -355,13 +366,14 @@
         render();
     }
 
-    // Update hard drop to use calculated position
+    // Update hardDrop to ensure piece sync
     function hardDrop(): void {
         if (gameState.over) return;
         
         const dropPosition = getGhostPosition();
         if (dropPosition.row > gameState.currentPiece.row) {
             gameState.currentPiece.row = dropPosition.row;
+            gameStore.updatePiece(gameState.currentPiece.name);
             placePiece();
             render();
         }
