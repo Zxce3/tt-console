@@ -48,6 +48,7 @@ function createGameStore() {
         const remainingSeconds = seconds % 60;
         return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
     };
+    let updateTimeout: number;
 
     return {
         subscribe,
@@ -105,7 +106,12 @@ function createGameStore() {
             update(state => ({ ...state, score }));
         },
         updatePiece: (piece: string) => {
-            update(state => ({ ...state, currentPiece: piece }));
+            if (updateTimeout) {
+                clearTimeout(updateTimeout);
+            }
+            updateTimeout = setTimeout(() => {
+                update(state => ({ ...state, currentPiece: piece }));
+            }, 16) as unknown as number; // 60fps timing
         },
         setStarted: (started: boolean) => {
             update(state => ({ ...state, started }));
